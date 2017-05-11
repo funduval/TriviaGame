@@ -5,9 +5,9 @@
     var queryURL = "http://jservice.io/api/clues";
     var trivia = []
     var correctAnswer = []
-    var closeAnswer =["Arbor Day","The Eastern Conference","Prostitute","The Biography of Leonard Nimoy","peacock and crocodile","The Painted Bird"];
-    var lameAnswer = ["November Solstice","The Eastern Division","Skullery Maid","Picard's Rescue","willoughby and koala","Tess"];
-    var dumbAnswer = ["Taco Tuesday","The Peach Bowl","Chorus Girl","The Final Frontier","jackalope and jaberwock","A Clockword Orange"];
+    var closeAnswer =["Arbor Day","The Eastern Conference","Prostitute","The Biography of Leonard Nimoy","peacock and crocodile","The Painted Bird","Iowa","Woman","Coopers","Mission Impossible","Oh Suzanna"];
+    var lameAnswer = ["November Solstice","The Eastern Division","Skullery Maid","Picard's Rescue","willoughby and koala","Tess","New Hampshire","Lefty","Keepers","Tropic Thunder","Clementine"];
+    var dumbAnswer = ["Taco Tuesday","The Peach Bowl","Chorus Girl","The Final Frontier","jackalope and jaberwock","A Clockword Orange","Ohio","Arab","Peepers","The Scientology Center","I'll Go A' Ramblin"];
     var win = 0;
     var lose = 0;
 
@@ -130,12 +130,13 @@ reset: function() {
   
     stopwatch.time = 30;
     $("#display").html(":30");
-    stopwatch.start()
+    stopwatch.start();
 
 }
 
+};
 
-}; 
+
 
  
 

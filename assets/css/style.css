@@ -81,6 +81,7 @@ ul{
 	border-style: groove;
 	border-color: #b83e0f;
 	background-color:#eca2a2;
+	background-image: url("../images/wood-pattern.png");
 	height:180px;
 	width:150px;
 	margin: auto;
@@ -136,5 +137,13 @@ ul{
 	margin:1% auto 1% 1%;
 }
 
+@media screen and (max-width: 768px) {
+
+	#top .col-sm-2 {
+display: inline;
+clear: all;
+
+	}
+}
 
 
