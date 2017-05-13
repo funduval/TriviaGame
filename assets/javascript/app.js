@@ -1,3 +1,5 @@
+//set global variables
+
 var queryURL = "http://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
@@ -7,32 +9,36 @@ var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Fr
 var win = 0;
 var lose = 0;
 
+//call the query and push the data into arrays
+
 $.ajax({
     url: queryURL,
     method: "GET"
 }).done(function(response) {
 
-    for (i = 0; i <= response.length - 1; i++) {
+    for (i = 0; i < 50; i++) {
 
         trivia.push(response[i].question);
     }
 
-    for (k = 0; k <= response.length - 1; k++) {
+    for (k = 0; k < 50; k++) {
 
         correctAnswer.push(response[k].answer);
     }
 
 });
 
+//create event handlers that run timing functions depending on what's clicked. All answer buttons have the class .stop, which stops timer
+
 
 window.onload = function() {
-    $("#lap").on("click", stopwatch.recordLap);
+    
     $(".stop").on("click", stopwatch.stop);
-    $("#reset").on("click", stopwatch.reset);
+   
     $("#start").on("click", stopwatch.start);
     $("#start").on("click", triviaPlay.newQuestion);
 
-newQuestion();
+    // newQuestion();
 
 };
 
@@ -70,6 +76,12 @@ var triviaPlay = {
 
         var answer = correctAnswer[rando];
 
+        $("#a").off("click");
+        $("#b").off("click");
+        $("#c").off("click");
+        $("#d").off("click");
+        $(".stop").on("click", stopwatch.stop);
+
         if (answer.length <= 8) {
 
             $("#a").html("  " + correctAnswer[rando]);
@@ -81,7 +93,7 @@ var triviaPlay = {
             $("#b").on("click", triviaPlay.lose);
             $("#c").on("click", triviaPlay.lose);
             $("#d").on("click", triviaPlay.lose);
-        };
+        }
 
         if (answer.length > 8 && answer.length <= 15) {
 
@@ -95,7 +107,7 @@ var triviaPlay = {
             $("#c").on("click", triviaPlay.lose);
             $("#d").on("click", triviaPlay.lose);
             $("#a").on("click", triviaPlay.lose);
-        };
+        }
 
         if (answer.length > 15 && answer.length <= 20) {
 
@@ -123,7 +135,7 @@ var triviaPlay = {
             $("#d").on("click", triviaPlay.lose);
             $("#a").on("click", triviaPlay.lose);
             $("#b").on("click", triviaPlay.lose);
-        };
+        }
     },
 
 
@@ -134,10 +146,11 @@ var triviaPlay = {
         $("#questions").css("visibility", "hidden");
 
         var timeVar;
-        setTimeout(function() {
+        timeVar = setTimeout(function() {
             triviaPlay.reset();
         }, 2000);
-          clearTimeout(myVar);
+        // clearTimeout(myVar);
+        reset();
 
     },
 
@@ -147,14 +160,16 @@ var triviaPlay = {
         $("#title").html("<img class='img-responsive' id='mrsWard' src='../TriviaGame/assets/images/Mrs_Wardroper.jpg' alt='Image'/>");
         $("#questions").css("visibility", "hidden");
         var timeVar;
-        timeVar=setTimeout(function() {
+        timeVar = setTimeout(function() {
             triviaPlay.reset();
         }, 2000);
-          clearTimeout(myVar);
+        // clearTimeout(myVar);
+        reset();
 
     },
 
     reset: function() {
+
         $("#mrsWard").remove()
         $("#clara").remove()
         $("#questions").css("visibility", "visible");
@@ -163,6 +178,7 @@ var triviaPlay = {
         stopwatch.time = 30;
         $("#display").html(":30");
         stopwatch.start();
+        triviaPlay();
 
     }
 
