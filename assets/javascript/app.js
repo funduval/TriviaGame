@@ -133,9 +133,11 @@ var triviaPlay = {
         $("#title").html("<img class='img-responsive' id='clara' src='../TriviaGame/assets/images/Clarabarton.jpg' alt='Image'/>");
         $("#questions").css("visibility", "hidden");
 
+        var timeVar;
         setTimeout(function() {
             triviaPlay.reset();
         }, 2000);
+          clearTimeout(myVar);
 
     },
 
@@ -144,10 +146,11 @@ var triviaPlay = {
         lose++;
         $("#title").html("<img class='img-responsive' id='mrsWard' src='../TriviaGame/assets/images/Mrs_Wardroper.jpg' alt='Image'/>");
         $("#questions").css("visibility", "hidden");
-
-        setTimeout(function() {
+        var timeVar;
+        timeVar=setTimeout(function() {
             triviaPlay.reset();
         }, 2000);
+          clearTimeout(myVar);
 
     },
 
