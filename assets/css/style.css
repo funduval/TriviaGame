@@ -1,4 +1,12 @@
+.score {
 
+display: inline;
+margin-left: 20%;
+margin-right: 20%;
+font-size: 14px; 
+float: left;
+
+}
 
 
 body {
@@ -135,6 +143,35 @@ ul{
 	
 	height: 150px;
 	margin:1% auto 1% 1%;
+}
+
+#athlete{
+
+
+
+	max-height: 700px;
+	display: inline;
+	float: left;
+
+}
+
+
+
+
+
+.userAlert {
+	display: inline;
+	float: right;
+	height:300px;
+	width:300px;
+	text-align: center;
+	padding: 6px;
+	margin-left: 8px;
+	margin-right: 10px;
+	
+	font-size:64px;
+
+
 }
 
 @media screen and (max-width: 768px) {
