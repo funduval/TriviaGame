@@ -1,6 +1,6 @@
 //set global variables
 
-var queryURL = "https://jservice.io/api/clues";
+var queryURL = "http://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
 var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump"];
@@ -9,6 +9,9 @@ var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Fr
 var win = 0;
 var lose = 0;
 var questionCounter = 0;
+var rando;
+var answerLength;
+
 //call the query and push the data into arrays
 
 $.ajax({
@@ -16,15 +19,18 @@ $.ajax({
     method: "GET"
 }).done(function(response) {
 
-    for (i = 0; i <= 25; i++) {
+    for (i = 0; i < 25; i++) {
 
         trivia.push(response[i].question);
-    }
 
-    for (k = 0; k <= 25; k++) {
+    };
+
+
+
+    for (k = 0; k < 25; k++) {
 
         correctAnswer.push(response[k].answer);
-    }
+    };
 
 });
 
@@ -85,13 +91,6 @@ var stopwatch = {
 
         }
 
-
-
-
-
-
-
-
     }
 };
 
@@ -99,24 +98,20 @@ var triviaPlay = {
 
 
 
-
     newQuestion: function() {
+
+
 
         $("#questions").css("visibility", "visible");
         $(".score").css("visibility", "visible");
         $("body").css("background-image", "url('../TriviaGame/assets/images/victorianBackground.png')");
-        $("#titleText").css("visibility", "hidden")
+        $("#titleText").css("visibility", "hidden");
 
-
-
-
-
-
-        var rando = Math.floor(Math.random() * (11 + 1));
+        rando = Math.floor(Math.random() * (trivia.length + 1));
 
         $("#bigQuestion").html(trivia[rando]);
 
-        var answer = correctAnswer[rando];
+       
 
         $("#a").off("click");
         $("#b").off("click");
@@ -124,12 +119,32 @@ var triviaPlay = {
         $("#d").off("click");
         $(".stop").on("click", stopwatch.stop);
 
-        if (answer.length <= 8) {
 
-            $("#a").html("  " + correctAnswer[rando]);
-            $("#b").html("  " + lameAnswer[rando]);
-            $("#c").html("  " + closeAnswer[rando]);
-            $("#d").html("  " + dumbAnswer[rando]);
+
+        if (rando > 0) {
+
+            answerLength = correctAnswer[rando-1].length;
+
+            }
+
+            else{
+
+                answerLength = correctAnswer[rando].length
+
+            }
+
+
+
+
+
+
+
+        if (answerLength <= 6) {
+
+            $("#a").html(correctAnswer[rando]);
+            $("#b").html(lameAnswer[rando]);
+            $("#c").html(closeAnswer[rando]);
+            $("#d").html(dumbAnswer[rando]);
 
             $("#a").on("click", triviaPlay.win);
             $("#b").on("click", triviaPlay.lose);
@@ -137,12 +152,12 @@ var triviaPlay = {
             $("#d").on("click", triviaPlay.lose);
         }
 
-        if (answer.length > 8 && answer.length <= 15) {
+        if (answerLength > 6 && answerLength <= 11) {
 
-            $("#b").html("  " + correctAnswer[rando]);
-            $("#c").html("  " + lameAnswer[rando]);
-            $("#d").html("  " + closeAnswer[rando]);
-            $("#a").html("  " + dumbAnswer[rando]);
+            $("#b").html(correctAnswer[rando]);
+            $("#c").html(lameAnswer[rando]);
+            $("#d").html(closeAnswer[rando]);
+            $("#a").html(dumbAnswer[rando]);
 
 
             $("#b").on("click", triviaPlay.win);
@@ -151,12 +166,12 @@ var triviaPlay = {
             $("#a").on("click", triviaPlay.lose);
         }
 
-        if (answer.length > 15 && answer.length <= 20) {
+        if (answerLength > 11 && answerLength <= 14) {
 
-            $("#d").html("  " + correctAnswer[rando]);
-            $("#a").html("  " + lameAnswer[rando]);
-            $("#b").html("  " + closeAnswer[rando]);
-            $("#c").html("  " + dumbAnswer[rando]);
+            $("#d").html(correctAnswer[rando]);
+            $("#a").html(lameAnswer[rando]);
+            $("#b").html(closeAnswer[rando]);
+            $("#c").html(dumbAnswer[rando]);
 
 
             $("#d").on("click", triviaPlay.win);
@@ -167,11 +182,11 @@ var triviaPlay = {
 
         }
 
-        if (answer.length > 20) {
-            $("#c").html("  " + correctAnswer[rando]);
-            $("#d").html("  " + lameAnswer[rando]);
-            $("#a").html("  " + closeAnswer[rando]);
-            $("#b").html("  " + dumbAnswer[rando]);
+        if (answerLength > 14) {
+            $("#c").html(correctAnswer[rando]);
+            $("#d").html(lameAnswer[rando]);
+            $("#a").html(closeAnswer[rando]);
+            $("#b").html(dumbAnswer[rando]);
 
             $("#c").on("click", triviaPlay.win);
             $("#d").on("click", triviaPlay.lose);
@@ -179,12 +194,73 @@ var triviaPlay = {
             $("#b").on("click", triviaPlay.lose);
         }
 
+//Fix some questions that were catalogued awkwardly in the API
+
+        if (trivia[rando] === "1 of 2 animals on its coat of arms") {
+
+            $("#bigQuestion").prepend("Australia has ");
+            $("#c").html("kangaroo and emu");
+            answerLength = 16;
 
 
+
+        }
+
+        if (trivia[rando] === "Eliza Doolittle did it for a living") {
+
+
+            $("#d").html("sold flowers");
+            
+            answerLength = 12;
+
+
+
+        }
+
+
+    },
+
+
+    used: function() {
+        //splice used questions and answers (of every kind) out of their arrays, so they're not repeated
+
+        var index = trivia.indexOf(trivia[rando]);
+        var correctIndex = correctAnswer.indexOf(correctAnswer[rando]);
+        var closeIndex = closeAnswer.indexOf(closeAnswer[rando]);
+        var lameIndex = lameAnswer.indexOf(lameAnswer[rando]);
+        var dumbIndex = dumbAnswer.indexOf(dumbAnswer[rando]);
+
+        if (index > -1) {
+            var usedQuestions = trivia.splice(index, 1);
+            console.log(usedQuestions);
+        }
+
+        if (correctIndex > -1) {
+            var usedCorrect = correctAnswer.splice(correctIndex, 1);
+            console.log(usedCorrect);
+        }
+
+        if (closeIndex > -1) {
+            var usedClose = closeAnswer.splice(closeIndex, 1);
+            console.log(usedClose);
+        }
+
+        if (lameIndex > -1) {
+            var usedLame = lameAnswer.splice(lameIndex, 1);
+            console.log(usedLame);
+        }
+
+        if (dumbIndex > -1) {
+            var usedDumb = dumbAnswer.splice(dumbIndex, 1);
+            console.log(usedDumb);
+
+        }
 
 
 
     },
+
+
 
 
     win: function() {
@@ -198,14 +274,14 @@ var triviaPlay = {
         $("#title").html("<img class='img-responsive' id='clara' src='../TriviaGame/assets/images/Clarabarton.jpg' alt='Image'/>");
         $("#questions").css("visibility", "hidden");
 
-        if (questionCounter >= 8) {
+        if (questionCounter > 24) {
 
             triviaPlay.ratings();
             var timeVar;
 
             timeVar = setTimeout(function() {
                 triviaPlay.endgame();
-            }, 10000);
+            }, 12000);
 
         } else {
             var timeVar;
@@ -216,10 +292,6 @@ var triviaPlay = {
 
 
         }
-
-
-       
-
 
     },
 
@@ -236,8 +308,7 @@ var triviaPlay = {
         $("#questions").css("visibility", "hidden");
 
 
-
-        if (questionCounter >= 8) {
+        if (questionCounter > 24) {
 
             triviaPlay.ratings();
 
@@ -257,16 +328,13 @@ var triviaPlay = {
 
             }, 2000);
 
-
-
         }
-
-
-       
 
     },
 
     reset: function() {
+
+        triviaPlay.used();
 
         $("#condensed").remove();
         $("#mrsWard").remove();
@@ -285,12 +353,11 @@ var triviaPlay = {
         loseBox.append("Correct: " + win + "<br>Incorrect: " + lose);
         $("#title").append(loseBox);
 
-
     },
 
     ratings: function() {
 
-        if (win <= 2) {
+        if (win <= 8) {
 
             $("#title").html("<img class='img-responsive' id='athlete' src='../TriviaGame/assets/images/Athlete.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
@@ -303,21 +370,14 @@ var triviaPlay = {
             ratingAlert.text("You're more brawn than brains, it seems. Perhaps become an Athlete of some kind.");
             $("#title").append(ratingAlert);
 
-
-
-
-
             $("body").css("background-image", "none");
-
-
-
 
             stopwatch.time = 0;
             stopwatch.stop();
 
         }
 
-        if (win > 2 && win <= 4) {
+        if (win > 8 && win <= 14) {
 
             $("#title").html("<img class='img-responsive' id='apprentice' src='../TriviaGame/assets/images/Apprentice.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
@@ -337,7 +397,7 @@ var triviaPlay = {
 
         }
 
-        if (win > 4 && win <= 6) {
+        if (win > 14 && win <= 18) {
 
 
             $("#title").html("<img class='img-responsive' id='highwayman' src='../TriviaGame/assets/images/Highwayman.jpg' alt='Image'/>");
@@ -358,7 +418,7 @@ var triviaPlay = {
 
         }
 
-        if (win > 6 && win < 8) {
+        if (win > 18 && win <= 24) {
 
             $("#title").html("<img class='img-responsive' id='apothecary' src='../TriviaGame/assets/images/Apothecary.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
@@ -375,8 +435,8 @@ var triviaPlay = {
             stopwatch.time = 0;
             stopwatch.stop();
         }
-
-        if (win >= 8) {
+ 
+        if (win = 24) {
 
             $("#title").html("<img class='img-responsive' id='aeronaut' src='../TriviaGame/assets/images/Aeronaut.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
@@ -395,7 +455,6 @@ var triviaPlay = {
             stopwatch.stop();
         }
 
-
     },
 
     endgame: function() {
@@ -409,28 +468,20 @@ var triviaPlay = {
         $("#aeronaut").remove()
         $("#highwayman").remove()
 
-
-
-
         $("#start").css("visibility", "visible");
         $("#display").css("visibility", "visible");
         $("#questions").html(triviaPlay.newQuestion);
         $("#questions").css("visibility", "hidden");
-
-
-
-
-
-
-
-
 
         $(".userAlert").remove();
 
         stopwatch.stop();
         stopwatch.time = 20;
         $("#display").html(":20");
-        $("#start").html("Play Again?")
+        
+        window.location.reload();
+      
+
 
 
     }
