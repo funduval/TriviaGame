@@ -1,6 +1,6 @@
 //set global variables
 
-var queryURL = "http://jservice.io/api/clues";
+var queryURL = "https://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
 var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump"];
