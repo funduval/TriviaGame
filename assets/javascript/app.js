@@ -280,7 +280,7 @@ var triviaPlay = {
         $("#title").html("<img class='img-responsive' id='clara' src='../TriviaGame/assets/images/Clarabarton.jpg' alt='Image'/>");
         $("#questions").css("visibility", "hidden");
 
-        if (questionCounter > 24) {
+        if (questionCounter === 25) {
 
             triviaPlay.ratings();
             var timeVar;
