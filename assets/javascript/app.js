@@ -202,26 +202,26 @@ var triviaPlay = {
         //Fix some questions that were catalogued awkwardly or mistyped in the API...
 
 
-        if (trivia[rando] === "1 of 2 animals on its coat of arms") {
+        // if (trivia[rando] === "1 of 2 animals on its coat of arms") {
 
-            $("#bigQuestion").prepend("Australia has ");
-            $("#c").html("kangaroo and emu");
-            answerLength = 16;
-
-
-
-        }
-
-        if (trivia[rando] === "Eliza Doolittle did it for a living") {
-
-
-            $("#c").html("sold flowers");
-
-            answerLength = 12;
+        //     $("#bigQuestion").prepend("Australia has ");
+        //     $("#c").html("kangaroo and emu");
+        //     answerLength = 16;
 
 
 
-        }
+        // }
+
+        // if (trivia[rando] === "Eliza Doolittle did it for a living") {
+
+
+        //     $("#c").html("sold flowers");
+
+        //     answerLength = 12;
+
+
+
+        // }
 
 
     },
@@ -316,7 +316,7 @@ var triviaPlay = {
         $("#questions").css("visibility", "hidden");
 
 
-        if (questionCounter > 24) {
+        if (questionCounter === 25) {
 
             triviaPlay.ratings();
 
@@ -452,7 +452,7 @@ var triviaPlay = {
             stopwatch.stop();
         }
 
-        if (win = 25) {
+        if (win === 25) {
 
             $("#title").html("<img class='img-responsive' id='aeronaut' src='../TriviaGame/assets/images/Aeronaut.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
