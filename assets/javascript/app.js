@@ -1,8 +1,10 @@
 //set global variables
 
-var queryURL = "http://jservice.io/api/clues";
-var trivia = []
-var correctAnswer = []
+// var queryURL = "http://jservice.io/api/clues";
+//sadly i must populate these arrays..I wanted to populate them by looping them through a query response but oh well:
+
+var trivia = ["The 1st Tuesday after the 1st Monday in November", "The Atlanta Braves are in this division of the National League", "Eliza Doolittle did it for a living", "Subtitled 'The Search for Spock'", "Australia has 1 of 2 animals on its coat of arms", "Malcolm McDowell & Nastassja Kinski's 'purr'fect roles in 1982", "Traditionally speaking, as this state goes, 'so goes the nation'", "Eddie Gaedel, number 1/8th, was the only one ever to play in the Major Leagues", "In the Old West they were in charge of horses, on a movie set in charge of chickens", "Title describing Tom Cruise's precarious commercial enterprise", "Title of this song, which actually means 'to tramp the roads with a backpack'", "Ancient weapon kept a stone's throw from its target", "'Shrill' name for train tour electioneering", "Now a paper company sales rep, he pitched only perfect game in World Series history", "He solemnly swears you in, in court", "Film where Lily Tomlin is really Steve Martin's better half", "'Satanic' mammal found only on island S. of Australia", "It gets things going in a chemical reaction", "The rooster was symbol of this party before Thomas Nast drew their new one in 1870", "Boston's 'Green Monster' is in this stadium", "Ub Iwerks, Friz Freleng & Tex Avery drew the line at this job", "Mozart's middle name becomes a movie", "Elizabeth Taylor character that could have burnt her paws on a hot tin roof", "He called himself 'the plain people's president against the privileged people's Congress", "In 1984, he became 1st manager to win over 100 games with teams in both Major Leagues"]
+var correctAnswer = ["Election Day", "The Western Division", "Sold Flowers", "Star Trek III", "kangaroo and emu", "cat people", "Maine", "a midget", "wranglers", "Risky Business", "Waltzing Matilda", "a catapult", "a whistle stop", "Don Larsen", "a bailiff", "All of Me", "Tasmanian Devil", "a catalyst", "the Democrats", "Fenway Park", "cartoonists or animators", "Amadeus", "Maggie the Cat", "Harry S Truman", "Sparky Anderson"]
 var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump", "Joe Torre"];
 var lameAnswer = ["November Solstice", "The Eastern Division", "Skullery Maid", "Picard's Rescue", "willoughby and koala", "Tess", "New Hampshire", "Lefty", "Keepers", "Tropic Thunder", "Clementine", "mace", "soap box", "Greg Maddux", "prosecutor", "Dirty Rotten Scoundrels", "Wombat", "an electron", "Tammany Hall", "TD Garden", "fishermen", "Wolfgang", "Martha", "Herbert Hoover", "Tony LaRussa"];
 var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Frontier", "jackalope and jaberwock", "A Clockword Orange", "Ohio", "Arab", "Peepers", "The Scientology Center", "I'll Go A' Ramblin", "tourret", "road trip", "Sandy Koufax", "public defender", "Dead Men Don't Wear Plaid", "Kimodo Dragon", "a chain reaction", "The Green Party", "Three Rivers Stadium", "architects", "Saglieri", "Cleopatra", "Woodrow Wilson", "Earl Weaver"];
@@ -13,28 +15,30 @@ var rando;
 var answerLength;
 var intervalId;
 
+//=======================================================================
+//Sadly, none of this worked as I can't mix http and https to deploy on GitHub. So I copy pasted arrays-the unsophisticated fix
 //call the query and push the data into arrays
 
-$.ajax({
-    url: queryURL,
-    method: "GET"
+// $.ajax({
+//     url: queryURL,
+//     method: "GET"
 
-}).done(function(response) {
+// }).done(function(response) {
 
-    for (i = 0; i < 25; i++) {
+    // for (i = 0; i < 25; i++) {
 
-        trivia.push(response[i].question);
+    //     trivia.push(response[i].question);
 
-    };
+    // };
 
 
 
-    for (k = 0; k < 25; k++) {
+    // for (k = 0; k < 25; k++) {
 
-        correctAnswer.push(response[k].answer);
-    };
+    //     correctAnswer.push(response[k].answer);
+    // };
 
-});
+
 
 //create event handlers that run timing functions depending on what's clicked. All answer buttons have the class .stop, which stops timer
 
