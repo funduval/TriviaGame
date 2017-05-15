@@ -81,7 +81,7 @@ var stopwatch = {
 
             anotherTimer = setTimeout(function() {
                 triviaPlay.reset();
-            }, 5000);
+            }, 6000);
 
         }
 
