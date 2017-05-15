@@ -1,10 +1,10 @@
 //set global variables
 
-var queryURL = "https://jservice.io/api/clues";
+var queryURL = "http://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
-var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump","Joe Torre"];
-var lameAnswer = ["November Solstice", "The Eastern Division", "Skullery Maid", "Picard's Rescue", "willoughby and koala", "Tess", "New Hampshire", "Lefty", "Keepers", "Tropic Thunder", "Clementine", "mace", "soap box", "Greg Maddux", "prosecutor", "Dirty Rotten Scoundrels", "Wombat", "an electron", "Tammany Hall", "TD Garden", "fishermen", "Wolfgang", "Martha", "Herbert Hoover","Tony LaRussa"];
+var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump", "Joe Torre"];
+var lameAnswer = ["November Solstice", "The Eastern Division", "Skullery Maid", "Picard's Rescue", "willoughby and koala", "Tess", "New Hampshire", "Lefty", "Keepers", "Tropic Thunder", "Clementine", "mace", "soap box", "Greg Maddux", "prosecutor", "Dirty Rotten Scoundrels", "Wombat", "an electron", "Tammany Hall", "TD Garden", "fishermen", "Wolfgang", "Martha", "Herbert Hoover", "Tony LaRussa"];
 var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Frontier", "jackalope and jaberwock", "A Clockword Orange", "Ohio", "Arab", "Peepers", "The Scientology Center", "I'll Go A' Ramblin", "tourret", "road trip", "Sandy Koufax", "public defender", "Dead Men Don't Wear Plaid", "Kimodo Dragon", "a chain reaction", "The Green Party", "Three Rivers Stadium", "architects", "Saglieri", "Cleopatra", "Woodrow Wilson", "Earl Weaver"];
 var win = 0;
 var lose = 0;
@@ -18,6 +18,7 @@ var intervalId;
 $.ajax({
     url: queryURL,
     method: "GET"
+
 }).done(function(response) {
 
     for (i = 0; i < 25; i++) {
@@ -114,7 +115,7 @@ var triviaPlay = {
 
         $("#bigQuestion").html(trivia[rando]);
 
-       
+
 
         $("#a").off("click");
         $("#b").off("click");
@@ -122,28 +123,24 @@ var triviaPlay = {
         $("#d").off("click");
         $(".stop").on("click", stopwatch.stop);
 
-//this is to make sure whatever is at the index of the array gets decremented (unless zero), because repeats are spliced out & array shortens
-
+        //this is to make sure whatever is at the index of the array gets decremented (unless zero), because repeats are spliced out & array shortens
+        //however, I still have the issue of one question repeating
+        
         if (rando > 0) {
 
-            answerLength = correctAnswer[rando-1].length;
+            answerLength = correctAnswer[rando - 1].length;
 
-            }
+        } else {
 
-            else{
+            answerLength = correctAnswer[rando].length
 
-                answerLength = correctAnswer[rando].length
-
-            }
-
-//===============================================================================================
+        }
 
 
+        //these conditionals are just an arbitrary way to decide how to shuffle the answers onto the buttons so it's different each time
 
-//these conditionals are just an arbitrary way to decide how to shuffle the answers onto the buttons so it's different each time
 
-
-        if (answerLength <= 8) {
+        if (answerLength <= 7) {
 
             $("#a").html(correctAnswer[rando]);
             $("#b").html(lameAnswer[rando]);
@@ -156,7 +153,7 @@ var triviaPlay = {
             $("#d").on("click", triviaPlay.lose);
         }
 
-        if (answerLength > 8 && answerLength <= 12) {
+        if (answerLength > 7 && answerLength <= 12) {
 
             $("#b").html(correctAnswer[rando]);
             $("#c").html(lameAnswer[rando]);
@@ -198,7 +195,7 @@ var triviaPlay = {
             $("#b").on("click", triviaPlay.lose);
         }
 
-//Fix some questions that were catalogued awkwardly or mistyped in the API...
+        //Fix some questions that were catalogued awkwardly or mistyped in the API...
 
 
         if (trivia[rando] === "1 of 2 animals on its coat of arms") {
@@ -215,7 +212,7 @@ var triviaPlay = {
 
 
             $("#c").html("sold flowers");
-            
+
             answerLength = 12;
 
 
@@ -265,7 +262,7 @@ var triviaPlay = {
 
     },
 
-// win function is still part of the triviaPlay object
+    // win function is still part of the triviaPlay object
 
 
     win: function() {
@@ -300,7 +297,7 @@ var triviaPlay = {
 
     },
 
-// lose function is still part of the triviaPlay object
+    // lose function is still part of the triviaPlay object
 
     lose: function() {
 
@@ -340,7 +337,7 @@ var triviaPlay = {
     },
 
 
-// reset function is still part of the triviaPlay object
+    // reset function is still part of the triviaPlay object
 
     reset: function() {
 
@@ -366,7 +363,7 @@ var triviaPlay = {
     },
 
 
-// ratings function is still part of the triviaPlay object--it rates the User score within a range of correct questions
+    // ratings function is still part of the triviaPlay object--it rates the User score within a range of correct questions
 
     ratings: function() {
 
@@ -450,8 +447,8 @@ var triviaPlay = {
             stopwatch.time = 0;
             stopwatch.stop();
         }
- 
-        if (win = 24) {
+
+        if (win = 25) {
 
             $("#title").html("<img class='img-responsive' id='aeronaut' src='../TriviaGame/assets/images/Aeronaut.jpg' alt='Image'/>");
             $("#questions").css("visibility", "hidden");
@@ -473,7 +470,7 @@ var triviaPlay = {
     },
 
 
-//endgame is still part of the triviaPlay object
+    //endgame is still part of the triviaPlay object
 
     endgame: function() {
 
@@ -496,9 +493,9 @@ var triviaPlay = {
         stopwatch.stop();
         stopwatch.time = 20;
         $("#display").html(":20");
-        
+
         window.location.reload();
-      
+
 
 
 
