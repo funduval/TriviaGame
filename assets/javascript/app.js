@@ -1,6 +1,6 @@
 //set global variables
 
-var queryURL = "http://jservice.io/api/clues";
+var queryURL = "https://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
 var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump","Joe Torre"];
@@ -11,6 +11,7 @@ var lose = 0;
 var questionCounter = 0;
 var rando;
 var answerLength;
+var intervalId;
 
 //call the query and push the data into arrays
 
@@ -49,7 +50,7 @@ window.onload = function() {
 
 };
 
-var intervalId;
+//this runs the stopwatch/timer. No matter what answer is clicked, it stops the timer
 
 var stopwatch = {
 
@@ -94,6 +95,8 @@ var stopwatch = {
     }
 };
 
+//this runs the game play-generates new questions,
+
 var triviaPlay = {
 
 
@@ -119,7 +122,7 @@ var triviaPlay = {
         $("#d").off("click");
         $(".stop").on("click", stopwatch.stop);
 
-
+//this is to make sure whatever is at the index of the array gets decremented (unless zero), because repeats are spliced out & array shortens
 
         if (rando > 0) {
 
@@ -133,10 +136,11 @@ var triviaPlay = {
 
             }
 
+//===============================================================================================
 
 
 
-
+//these conditionals are just an arbitrary way to decide how to shuffle the answers onto the buttons so it's different each time
 
 
         if (answerLength <= 8) {
@@ -194,7 +198,8 @@ var triviaPlay = {
             $("#b").on("click", triviaPlay.lose);
         }
 
-//Fix some questions that were catalogued awkwardly in the API
+//Fix some questions that were catalogued awkwardly or mistyped in the API...
+
 
         if (trivia[rando] === "1 of 2 animals on its coat of arms") {
 
@@ -260,7 +265,7 @@ var triviaPlay = {
 
     },
 
-
+// win function is still part of the triviaPlay object
 
 
     win: function() {
@@ -294,6 +299,8 @@ var triviaPlay = {
         }
 
     },
+
+// lose function is still part of the triviaPlay object
 
     lose: function() {
 
@@ -332,6 +339,9 @@ var triviaPlay = {
 
     },
 
+
+// reset function is still part of the triviaPlay object
+
     reset: function() {
 
         triviaPlay.used();
@@ -355,6 +365,9 @@ var triviaPlay = {
 
     },
 
+
+// ratings function is still part of the triviaPlay object--it rates the User score within a range of correct questions
+
     ratings: function() {
 
         if (win <= 8) {
@@ -376,6 +389,8 @@ var triviaPlay = {
             stopwatch.stop();
 
         }
+
+
 
         if (win > 8 && win <= 14) {
 
@@ -456,6 +471,9 @@ var triviaPlay = {
         }
 
     },
+
+
+//endgame is still part of the triviaPlay object
 
     endgame: function() {
 
