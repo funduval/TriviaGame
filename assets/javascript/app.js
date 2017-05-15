@@ -3,9 +3,9 @@
 var queryURL = "http://jservice.io/api/clues";
 var trivia = []
 var correctAnswer = []
-var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump"];
-var lameAnswer = ["November Solstice", "The Eastern Division", "Skullery Maid", "Picard's Rescue", "willoughby and koala", "Tess", "New Hampshire", "Lefty", "Keepers", "Tropic Thunder", "Clementine", "mace", "soap box", "Greg Maddux", "prosecutor", "Dirty Rotten Scoundrels", "Wombat", "an electron", "Tammany Hall", "TD Garden", "fishermen", "Wolfgang", "Martha", "Herbert Hoover"];
-var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Frontier", "jackalope and jaberwock", "A Clockword Orange", "Ohio", "Arab", "Peepers", "The Scientology Center", "I'll Go A' Ramblin", "tourret", "road trip", "Sandy Koufax", "public defender", "Dead Men Don't Wear Plaid", "Kimodo Dragon", "a chain reaction", "The Green Party", "Three Rivers Stadium", "architects", "Saglieri", "Cleopatra", "Woodrow Wilson"];
+var closeAnswer = ["Arbor Day", "The Eastern Conference", "Prostitute", "The Biography of Leonard Nimoy", "peacock and crocodile", "The Painted Bird", "Iowa", "Woman", "Coopers", "Mission Impossible", "Oh Suzanna", "cat-o-nine-tails", "stump speech", "Michael Scott", "judge", "The Man With Two Brains", "Banshee", "an enzyme", "The Torys", "Agganis Arena", "publishers", "Franz", "Virginia Woolf", "Donald Trump","Joe Torre"];
+var lameAnswer = ["November Solstice", "The Eastern Division", "Skullery Maid", "Picard's Rescue", "willoughby and koala", "Tess", "New Hampshire", "Lefty", "Keepers", "Tropic Thunder", "Clementine", "mace", "soap box", "Greg Maddux", "prosecutor", "Dirty Rotten Scoundrels", "Wombat", "an electron", "Tammany Hall", "TD Garden", "fishermen", "Wolfgang", "Martha", "Herbert Hoover","Tony LaRussa"];
+var dumbAnswer = ["Taco Tuesday", "The Peach Bowl", "Chorus Girl", "The Final Frontier", "jackalope and jaberwock", "A Clockword Orange", "Ohio", "Arab", "Peepers", "The Scientology Center", "I'll Go A' Ramblin", "tourret", "road trip", "Sandy Koufax", "public defender", "Dead Men Don't Wear Plaid", "Kimodo Dragon", "a chain reaction", "The Green Party", "Three Rivers Stadium", "architects", "Saglieri", "Cleopatra", "Woodrow Wilson", "Earl Weaver"];
 var win = 0;
 var lose = 0;
 var questionCounter = 0;
@@ -139,7 +139,7 @@ var triviaPlay = {
 
 
 
-        if (answerLength <= 6) {
+        if (answerLength <= 8) {
 
             $("#a").html(correctAnswer[rando]);
             $("#b").html(lameAnswer[rando]);
@@ -152,7 +152,7 @@ var triviaPlay = {
             $("#d").on("click", triviaPlay.lose);
         }
 
-        if (answerLength > 6 && answerLength <= 11) {
+        if (answerLength > 8 && answerLength <= 12) {
 
             $("#b").html(correctAnswer[rando]);
             $("#c").html(lameAnswer[rando]);
@@ -166,7 +166,7 @@ var triviaPlay = {
             $("#a").on("click", triviaPlay.lose);
         }
 
-        if (answerLength > 11 && answerLength <= 14) {
+        if (answerLength > 12 && answerLength <= 16) {
 
             $("#d").html(correctAnswer[rando]);
             $("#a").html(lameAnswer[rando]);
@@ -182,7 +182,7 @@ var triviaPlay = {
 
         }
 
-        if (answerLength > 14) {
+        if (answerLength > 16) {
             $("#c").html(correctAnswer[rando]);
             $("#d").html(lameAnswer[rando]);
             $("#a").html(closeAnswer[rando]);
@@ -209,7 +209,7 @@ var triviaPlay = {
         if (trivia[rando] === "Eliza Doolittle did it for a living") {
 
 
-            $("#d").html("sold flowers");
+            $("#c").html("sold flowers");
             
             answerLength = 12;
 
